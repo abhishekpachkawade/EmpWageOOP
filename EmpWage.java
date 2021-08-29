@@ -15,49 +15,38 @@ public static void main(String[] args) {
 
 class Attendance{
 	// local variable 
-	int empPresent = 1;
-	int wagePerHour=20;
+	int empFullTime=1;
+    int wagePerHour=20;
     int fullDayHour=8;
+    int partTimeHour=4;
     int dailyWage;
     
 	// Method with type void
 	void show() {
 		
-		// Generate Random number 0 or 1 with type of double 
-		double empCheck = Math.floor(Math.random()*10%2);
-		
-		// if else condition to check employee is present or absent 
-		if(empPresent == empCheck) {
-			
-	    	// calculate Daily wage 
-	        dailyWage=wagePerHour*fullDayHour;
-	        System.out.print("Employee is Presnt and his daily wage is: "+dailyWage);
-		
-		}
-		else {
-			
-			//print statement if the condition is false than print 
-			System.out.println("Employee is Absent ");
-		}
+		// To Generat Random Number
+        double empCheck= (int) Math.floor(Math.random()*10%3);
+        
+     // if else condition to check Employee is present or Absent if present than calculate wage also
+        if(empCheck == empFullTime){
+        	
+	    	 // calculate Dailywage for FullTime employee
+            dailyWage=wagePerHour*fullDayHour;
+            System.out.print("Employee is Full Time and his daily wage is: "+dailyWage);
+            }
+        else {
+        	
+        	// nested if else condition 
+        	if(empCheck == partTimeHour){
+      
+        	// calculate Dailywage for PartTime employee	
+            dailyWage=wagePerHour*partTimeHour;
+            System.out.print("Employee is Part Time and his daily wage is: "+dailyWage);
+            }
+           else {
+        	System.out.println("Employee is Absent");
+            }
+        }
 
-	
-	}
-	
+	}	
 }
-
-
-
-
-/*
- OUTPUT
- 
- Employee is Absent
- 
- OR
- 
- Employee is present
- 
- */
-
-
-
