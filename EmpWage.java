@@ -25,27 +25,31 @@ class Attendance{
 	void show() {
 		
 		// To Generat Random Number
-        double empCheck= (int) Math.floor(Math.random()*10%3);
+        double empCheck= Math.floor(Math.random()*10%2);
+       
+        // Converting to integer value and assin to choice 
+        int choice = (int) (empCheck);
         
-     // if else condition to check Employee is present or Absent if present than calculate wage also
-        if(empCheck == empFullTime){
-        	
-	    	 // calculate Dailywage for FullTime employee
-            dailyWage=wagePerHour*fullDayHour;
-            System.out.print("Employee is Full Time and his daily wage is: "+dailyWage);
-            }
-        else {
-        	
-        	// nested if else condition 
-        	if(empCheck == partTimeHour){
-      
-        	// calculate Dailywage for PartTime employee	
-            dailyWage=wagePerHour*partTimeHour;
-            System.out.print("Employee is Part Time and his daily wage is: "+dailyWage);
-            }
-           else {
-        	System.out.println("Employee is Absent");
-            }
+        //print value 
+        System.out.println(choice);
+        
+        //switch case statement 
+        switch (choice) {
+            case 1:
+            	
+            	// calculating wage 
+                dailyWage = wagePerHour * fullDayHour;
+                System.out.print("Employee is Full Time");
+                System.out.print("Employee wage: " + dailyWage);
+                break;
+
+            case 0:
+                dailyWage = wagePerHour * partTimeHour;
+                System.out.print("Employee is Part Time");
+                System.out.print("Employee wage: " + dailyWage);
+                break;
+
+        
         }
 
 	}	
