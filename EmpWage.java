@@ -14,42 +14,43 @@ public static void main(String[] args) {
 }
 
 class Attendance{
-	// local variable 
-	int empFullTime=1;
-    int wagePerHour=20;
-    int fullDayHour=8;
-    int partTimeHour=4;
-    int dailyWage;
+	 //local variable
+	  int MAX_DAYS=20;
+      int MAX_HOURS=100;
+      int empHrs=0,totalWorkingHours=0;
+      int totalWorkingDays=0;
     
 	// Method with type void
 	void show() {
 		
-		// To Generat Random Number
-        double empCheck= Math.floor(Math.random()*10%2);
-       
-        // Converting to integer value and assin to choice 
-        int choice = (int) (empCheck);
-        
-        //print value 
-        System.out.println(choice);
-        
-        //switch case statement 
-        switch (choice) {
-            case 1:
-            	
-            	// calculating wage 
-                dailyWage = wagePerHour * fullDayHour;
-                System.out.print("Employee is Full Time");
-                System.out.print("Employee wage: " + dailyWage);
-                break;
+		 // final is the keyword 
+        final int FULLTIME=1;
+        final int HALFTIME=0;
 
-            case 0:
-                dailyWage = wagePerHour * partTimeHour;
-                System.out.print("Employee is Part Time");
-                System.out.print("Employee wage: " + dailyWage);
-                break;
-
-        
+        //while loop 
+        while(empHrs<MAX_HOURS && totalWorkingDays <=MAX_DAYS){
+            totalWorkingDays++;
+            
+            // To Generate Random Number
+            int check=(int)(Math.floor(Math.random()*10)%3);
+            
+            //switch case statement 
+            switch(check) {
+                case FULLTIME:
+                    empHrs=8;
+                    break;
+                case HALFTIME:
+                    empHrs=4;
+                    break;
+                default:
+                    empHrs=0;
+                    break;
+            }
+            totalWorkingHours+=empHrs;
+            
+            // print statement 
+            System.out.println("Total working Hours " + totalWorkingHours);
+            System.out.println("Total working Days " + (totalWorkingDays-1));
         }
 
 	}	
