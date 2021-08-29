@@ -16,7 +16,10 @@ public static void main(String[] args) {
 class Attendance{
 	// local variable 
 	int empPresent = 1;
-	
+	int wagePerHour=20;
+    int fullDayHour=8;
+    int dailyWage;
+    
 	// Method with type void
 	void show() {
 		
@@ -26,8 +29,9 @@ class Attendance{
 		// if else condition to check employee is present or absent 
 		if(empPresent == empCheck) {
 			
-			//print statement if the condition is true than print  
-			System.out.println("Employee is present");
+	    	// calculate Daily wage 
+	        dailyWage=wagePerHour*fullDayHour;
+	        System.out.print("Employee is Presnt and his daily wage is: "+dailyWage);
 		
 		}
 		else {
@@ -36,6 +40,7 @@ class Attendance{
 			System.out.println("Employee is Absent ");
 		}
 
+	
 	}
 	
 }
