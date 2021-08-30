@@ -8,7 +8,8 @@ public static void main(String[] args) {
 		Attendance Obj = new Attendance();
 		
 		//object of attendance class 
-		Obj.show();
+		Obj.computeEmpWage("Dmart", 20, 2, 10);
+		Obj.computeEmpWage("Google", 20, 16, 10);
 	}
 
 }
@@ -21,7 +22,7 @@ class Attendance{
       int totalWorkingDays=0;
     
 	// Method with type void
-	void show() {
+	void computeEmpWage(String company,int empRatePerHour, int workingDays, int maxHoursInMonth) {
 		
 		 // final is the keyword 
         final int FULLTIME=1;
@@ -48,10 +49,37 @@ class Attendance{
             }
             totalWorkingHours+=empHrs;
             
-            // print statement 
-            System.out.println("Total working Hours " + totalWorkingHours);
-            System.out.println("Total working Days " + (totalWorkingDays-1));
+            
         }
-
+        
+        // print statement 
+        System.out.println("\nCompany Name " +company);
+        System.out.println("Total Working Days" +totalWorkingDays);
+        System.out.println("Total Working Hours" +totalWorkingHours);
+        int totalEmpWage = empRatePerHour * totalWorkingHours;
+        System.out.println("\nTotal Employee Wage is: "+totalEmpWage+" Rs");
 	}	
 }
+
+
+
+/*
+OUTPUT
+
+Company Name Dmart
+Total Working Days21
+Total Working Hours108
+
+Total Employee Wage is: 2160 Rs
+
+Company Name Google
+Total Working Days21
+Total Working Hours108
+
+Total Employee Wage is: 2160 Rs
+
+
+
+
+
+*/
