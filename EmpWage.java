@@ -2,63 +2,72 @@ package com.bl.emp;
 
 public class EmpWage {
 
-public static void main(String[] args) {
-		
-		//creating a object of Attendance class object name is Obj 
-		Attendance Obj = new Attendance();
-		
-		//object of attendance class 
-		Obj.computeEmpWage("Dmart", 20, 2, 10);
-		Obj.computeEmpWage("Google", 20, 16, 10);
-	}
+	 //constants
+    public static final int partTime = 1;
+    public static final int fullTime = 2;
 
-}
+    //private variable
+    private final String company;
+    private final int empRatePerHour;
+    private final int numOfWorkingDays;
+    private final int maxHoursPerMonth;
+    private int totalEmpWage;
 
-class Attendance{
-	 //local variable
-	  int MAX_DAYS=20;
-      int MAX_HOURS=100;
-      int empHrs=0,totalWorkingHours=0;
-      int totalWorkingDays=0;
-    
-	// Method with type void
-	void computeEmpWage(String company,int empRatePerHour, int workingDays, int maxHoursInMonth) {
-		
-		 // final is the keyword 
-        final int FULLTIME=1;
-        final int HALFTIME=0;
+    //Constructor with 3 parameter
+    public EmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+        this.company = company;
+        this.empRatePerHour = empRatePerHour;
+        this.numOfWorkingDays = numOfWorkingDays;
+        this.maxHoursPerMonth = maxHoursPerMonth;
+    }
 
-        //while loop 
-        while(empHrs<MAX_HOURS && totalWorkingDays <=MAX_DAYS){
+    //method 
+    public void computeEmpWage() {
+        System.out.println("Welcome To Employee Wage Computation");
+        // Variables
+        int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+        // Computation while loop
+        while (totalEmpHrs <= maxHoursPerMonth &&
+                totalWorkingDays < numOfWorkingDays) {
             totalWorkingDays++;
-            
-            // To Generate Random Number
-            int check=(int)(Math.floor(Math.random()*10)%3);
-            
+            //Generate random number 
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             //switch case statement 
-            switch(check) {
-                case FULLTIME:
-                    empHrs=8;
+            switch (empCheck) {
+                case partTime:
+                    empHrs = 4;
                     break;
-                case HALFTIME:
-                    empHrs=4;
+                case fullTime:
+                    empHrs = 8;
                     break;
                 default:
-                    empHrs=0;
-                    break;
+                    empHrs = 0;
             }
-            totalWorkingHours+=empHrs;
-            
-            
+            totalEmpHrs += empHrs;
+            //printing day and Employee Hr
+            System.out.println("Total Working Days: " + totalWorkingDays + " Employee Hours: " + empHrs);
         }
-        
-        // print statement 
-        System.out.println("\nCompany Name " +company);
-        System.out.println("Total Working Days" +totalWorkingDays);
-        System.out.println("Total Working Hours" +totalWorkingHours);
-        int totalEmpWage = empRatePerHour * totalWorkingHours;
-        System.out.println("\nTotal Employee Wage is: "+totalEmpWage+" Rs");
-	}	
+        totalEmpWage = totalEmpHrs * empRatePerHour;
+    }
+
+    @Override
+    public String toString() {
+        return "Total Employee Wage for Company:"  +company+" is: " + totalEmpWage;
+    }
+
+    //main method 
+    public static void main(String[] args) {
+    	//create object and calling constructor by passing 3 value
+        EmpWage dMart = new EmpWage("DMart", 200, 2, 10);
+        EmpWage google = new EmpWage("Google", 150, 4, 20);
+        //calling method
+        dMart.computeEmpWage(); 
+        System.out.println(dMart);
+        google.computeEmpWage();
+        System.out.println(google);
+
+    }
+
 }
 
 
@@ -66,20 +75,15 @@ class Attendance{
 /*
 OUTPUT
 
-Company Name Dmart
-Total Working Days21
-Total Working Hours108
-
-Total Employee Wage is: 2160 Rs
-
-Company Name Google
-Total Working Days21
-Total Working Hours108
-
-Total Employee Wage is: 2160 Rs
-
-
-
-
+Welcome To Employee Wage Computation
+Total Working Days: 1 Employee Hours: 4
+Total Working Days: 2 Employee Hours: 0
+Total Employee Wage for Company:DMart is: 800
+Welcome To Employee Wage Computation
+Total Working Days: 1 Employee Hours: 8
+Total Working Days: 2 Employee Hours: 8
+Total Working Days: 3 Employee Hours: 0
+Total Working Days: 4 Employee Hours: 0
+Total Employee Wage for Company:Google is: 2400
 
 */
