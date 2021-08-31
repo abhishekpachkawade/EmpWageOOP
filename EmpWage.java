@@ -2,88 +2,74 @@ package com.bl.emp;
 
 public class EmpWage {
 
-	 //constants
-    public static final int partTime = 1;
-    public static final int fullTime = 2;
+		//variable
+	 	public static final int isPartTime=0;
+	    public static final int isFullTime=1;
+	    private int numOfCompany;
+	    private CompanyEmpWage empWageArray[];
 
-    //private variable
-    private final String company;
-    private final int empRatePerHour;
-    private final int numOfWorkingDays;
-    private final int maxHoursPerMonth;
-    private int totalEmpWage;
+	    //constructor
+	    public EmpWage() {
+	        empWageArray=new CompanyEmpWage[5];
+	    }
+	    
+	    //method with four parameter
+	    private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maximumHoursPerMonth) {
+	        empWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maximumHoursPerMonth);
+	        numOfCompany++;
+	    }
+	    
+	    //private method
+	    private void computeEmpWage() {
+	        for(int i=0;i<numOfCompany;i++) {
+	            empWageArray[i].setTotalEmpWage(this.computeEmpWage(empWageArray[i]));
+	            System.out.println(empWageArray[i]);
+	        }
+	    }
+	    
+	    //private method with integer return type
+	    private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	    	//local variable
+	        int empHours=0, totalEmpHours=0, totalWorkingDays=0;
+	        //while loop
+	        while(totalEmpHours<=companyEmpWage.maximumHoursPerMonth && totalWorkingDays<companyEmpWage.numOfWorkingDays){
+	            //Generate random number
+	        	int check=(int)(Math.floor(Math.random()*10)%2);
+	        	//switch case to check employee is partTime of fullTime
+	            switch(check){
+	                case isPartTime:
+	                    empHours=4;
+	                    break;
+	                case isFullTime:
+	                    empHours=8;
+	                    break;
+	                default :
+	                    empHours=0;
+	            }
+	            totalEmpHours+=empHours;
+	            totalWorkingDays+=1;
+	        }
+	        return totalEmpHours * companyEmpWage.empRatePerHour;
 
-    //Constructor with 3 parameter
-    public EmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-        this.company = company;
-        this.empRatePerHour = empRatePerHour;
-        this.numOfWorkingDays = numOfWorkingDays;
-        this.maxHoursPerMonth = maxHoursPerMonth;
-    }
+	    }
+	    
+	    //main method
+	    public static void main(String args[]) {
+	    	//creating object 
+	        EmpWage employeeWage=new EmpWage();
+	        //calling method 
+	        employeeWage.addCompanyEmpWage("Dmart", 15, 21, 80);
+	        employeeWage.addCompanyEmpWage("Reliance", 15, 22, 100);
+	        employeeWage.computeEmpWage();
 
-    //method 
-    public void computeEmpWage() {
-        System.out.println("Welcome To Employee Wage Computation");
-        // Variables
-        int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-        // Computation while loop
-        while (totalEmpHrs <= maxHoursPerMonth &&
-                totalWorkingDays < numOfWorkingDays) {
-            totalWorkingDays++;
-            //Generate random number 
-            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
-            //switch case statement 
-            switch (empCheck) {
-                case partTime:
-                    empHrs = 4;
-                    break;
-                case fullTime:
-                    empHrs = 8;
-                    break;
-                default:
-                    empHrs = 0;
-            }
-            totalEmpHrs += empHrs;
-            //printing day and Employee Hr
-            System.out.println("Total Working Days: " + totalWorkingDays + " Employee Hours: " + empHrs);
-        }
-        totalEmpWage = totalEmpHrs * empRatePerHour;
-    }
-
-    @Override
-    public String toString() {
-        return "Total Employee Wage for Company:"  +company+" is: " + totalEmpWage;
-    }
-
-    //main method 
-    public static void main(String[] args) {
-    	//create object and calling constructor by passing 3 value
-        EmpWage dMart = new EmpWage("DMart", 200, 2, 10);
-        EmpWage google = new EmpWage("Google", 150, 4, 20);
-        //calling method
-        dMart.computeEmpWage(); 
-        System.out.println(dMart);
-        google.computeEmpWage();
-        System.out.println(google);
-
-    }
-
-}
-
+	    }
+	}
 
 
 /*
 OUTPUT
 
-Welcome To Employee Wage Computation
-Total Working Days: 1 Employee Hours: 4
-Total Working Days: 2 Employee Hours: 0
-Total Employee Wage for Company:DMart is: 800
-Welcome To Employee Wage Computation
-Total Working Days: 1 Employee Hours: 8
-Total Working Days: 2 Employee Hours: 8
-Total Working Days: 3 Employee Hours: 0
-Total Working Days: 4 Employee Hours: 0
-Total Employee Wage for Company:Google is: 2400
+Total Employee Wage for Dmart is 1260
+Total Employee Wage for Reliance is 1620
 
 */
