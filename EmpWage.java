@@ -1,6 +1,6 @@
 package com.bl.emp;
 
-public class EmpWage {
+public class EmpWage implements IComputeWage{
 
 		//variable
 	 	public static final int isPartTime=0;
@@ -14,7 +14,8 @@ public class EmpWage {
 	    }
 	    
 	    //method with four parameter
-	    private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maximumHoursPerMonth) {
+	    @Override
+	    public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maximumHoursPerMonth) {
 	        empWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maximumHoursPerMonth);
 	        numOfCompany++;
 	    }
@@ -28,7 +29,8 @@ public class EmpWage {
 	    }
 	    
 	    //private method with integer return type
-	    private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	    @Override 
+	    public int computeEmpWage(CompanyEmpWage companyEmpWage) {
 	    	//local variable
 	        int empHours=0, totalEmpHours=0, totalWorkingDays=0;
 	        //while loop
